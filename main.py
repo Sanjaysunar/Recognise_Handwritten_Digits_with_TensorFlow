@@ -89,3 +89,7 @@ for i in range(n_iterations):
             "\t| Accuracy =",
             str(minibatch_accuracy)
         )
+
+# After training
+test_accuracy = sess.run(accuracy, feed_dict={X: ,mnist.test.images, Y: mnist.test.labels, keep_prob: 1.0})
+print("\n Accuracy on test set:",test_accuracy)
