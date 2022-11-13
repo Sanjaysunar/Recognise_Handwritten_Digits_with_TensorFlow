@@ -58,3 +58,7 @@ cross_entropy = tf.reduce_mean(
         labels=Y, logits=output_layer
     ))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+
+#Training and Testing
+correct_pred = tf.equal(tf.argmax(output_layer,1), tf.argmax(Y, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
