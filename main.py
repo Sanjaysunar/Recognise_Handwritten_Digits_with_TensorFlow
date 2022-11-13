@@ -62,3 +62,30 @@ train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 #Training and Testing
 correct_pred = tf.equal(tf.argmax(output_layer,1), tf.argmax(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+
+# initialize a session for running the graph
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+
+# train on mini batches
+for i in range(n_iterations):
+    batch_x, batch_y = mnist.train.next_batch(batch_size)
+    sess.run(train_step, feed_dict={
+        X: batch_x, Y: batch_y, keep_prob: dropout
+    })
+
+    #print loss and accuracy (per minibatch)
+    if i % 100 == 0:
+        minibatch_loss, minibatch_accuracy = sess.run(
+            [cross_entropy, accuracy],
+            feed_dict={X: batch_x, Y:batch_y, keep_prob: 1.0}
+        )
+        print(
+            "Iteration",
+            str(i),
+            "\t| Loss =",
+            str(minibatch_loss) ,
+            "\t| Accuracy =",
+            str(minibatch_accuracy)
+        )
