@@ -91,5 +91,5 @@ for i in range(n_iterations):
         )
 
 # After training
-test_accuracy = sess.run(accuracy, feed_dict={X: ,mnist.test.images, Y: mnist.test.labels, keep_prob: 1.0})
+test_accuracy = sess.run(accuracy, feed_dict={X: mnist.test.images, Y: mnist.test.labels, keep_prob: 1.0})
 print("\n Accuracy on test set:",test_accuracy)
